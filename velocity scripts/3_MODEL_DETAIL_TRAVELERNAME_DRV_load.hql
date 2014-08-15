@@ -1,0 +1,366 @@
+SET hive.stats.autogather=false;
+SET hive.exec.compress.output=true; 
+SET mapred.output.compression.codec=org.apache.hadoop.io.compress.SnappyCodec; 
+SET mapred.output.compression.type=BLOCK;
+SET hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat;
+
+USE gfora;
+
+DROP TABLE MODEL_DETAIL_TRAVELERNAME_DRV;
+
+CREATE TABLE MODEL_DETAIL_TRAVELERNAME_DRV
+ROW FORMAT DELIMITED
+STORED AS SEQUENCEFILE
+AS
+
+SELECT
+ d.FRAUD_TRANSACTION_ID
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_FULL_NAME_DERIVED_n 
+      else ''
+     end) AS TRAVELER_FULL_NAME_DERIVED_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_GIVEN_NAME_n 
+      else ''
+     end) AS TRAVELER_GIVEN_NAME_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_MIDDLE_NAME_n 
+      else ''
+     end) AS TRAVELER_MIDDLE_NAME_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_LAST_NAME_n 
+      else ''
+     end) AS TRAVELER_LAST_NAME_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_GENDER_NAME_n 
+      else ''
+     end) AS TRAVELER_GENDER_NAME_1	 
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_IS_PRIMARY_n 
+      else ''
+     end) AS TRAVELER_IS_PRIMARY_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_IS_SURNAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_LOWER_CASE_1
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_IS_SURNAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_UPPER_CASE_1
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_FULL_NAME_DERIVED_n 
+      else ''
+     end) AS TRAVELER_FULL_NAME_DERIVED_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_GIVEN_NAME_n 
+      else ''
+     end) AS TRAVELER_GIVEN_NAME_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_MIDDLE_NAME_n 
+      else ''
+     end) AS TRAVELER_MIDDLE_NAME_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_LAST_NAME_n 
+      else ''
+     end) AS TRAVELER_LAST_NAME_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_GENDER_NAME_n 
+      else ''
+     end) AS TRAVELER_GENDER_NAME_2	 
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_IS_PRIMARY_n 
+      else ''
+     end) AS TRAVELER_IS_PRIMARY_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_IS_SURNAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_LOWER_CASE_2
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_IS_SURNAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_UPPER_CASE_2
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_FULL_NAME_DERIVED_n 
+      else ''
+     end) AS TRAVELER_FULL_NAME_DERIVED_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_GIVEN_NAME_n 
+      else ''
+     end) AS TRAVELER_GIVEN_NAME_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_MIDDLE_NAME_n 
+      else ''
+     end) AS TRAVELER_MIDDLE_NAME_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_LAST_NAME_n 
+      else ''
+     end) AS TRAVELER_LAST_NAME_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_GENDER_NAME_n 
+      else ''
+     end) AS TRAVELER_GENDER_NAME_3	 
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_IS_PRIMARY_n 
+      else ''
+     end) AS TRAVELER_IS_PRIMARY_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_IS_SURNAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_LOWER_CASE_3
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_IS_SURNAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_UPPER_CASE_3
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_FULL_NAME_DERIVED_n 
+      else ''
+     end) AS TRAVELER_FULL_NAME_DERIVED_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_GIVEN_NAME_n 
+      else ''
+     end) AS TRAVELER_GIVEN_NAME_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_MIDDLE_NAME_n 
+      else ''
+     end) AS TRAVELER_MIDDLE_NAME_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_LAST_NAME_n 
+      else ''
+     end) AS TRAVELER_LAST_NAME_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_GENDER_NAME_n 
+      else ''
+     end) AS TRAVELER_GENDER_NAME_4	 
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_IS_PRIMARY_n 
+      else ''
+     end) AS TRAVELER_IS_PRIMARY_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_IS_SURNAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_LOWER_CASE_4
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_IS_SURNAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_UPPER_CASE_4
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_FULL_NAME_DERIVED_n 
+      else ''
+     end) AS TRAVELER_FULL_NAME_DERIVED_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_GIVEN_NAME_n 
+      else ''
+     end) AS TRAVELER_GIVEN_NAME_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_MIDDLE_NAME_n 
+      else ''
+     end) AS TRAVELER_MIDDLE_NAME_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_LAST_NAME_n 
+      else ''
+     end) AS TRAVELER_LAST_NAME_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_GENDER_NAME_n 
+      else ''
+     end) AS TRAVELER_GENDER_NAME_5	 
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_IS_PRIMARY_n 
+      else ''
+     end) AS TRAVELER_IS_PRIMARY_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_IS_SURNAME_LOWER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_LOWER_CASE_5
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_IS_SURNAME_UPPER_CASE_n 
+      else ''
+     end) AS TRAVELER_IS_SURNAME_UPPER_CASE_5
+FROM
+(
+ SELECT
+  c.FRAUD_TRANSACTION_ID
+ ,c.TRAVELER_FULL_NAME_DERIVED_n
+ ,c.TRAVELER_GIVEN_NAME_n
+ ,c.TRAVELER_MIDDLE_NAME_n
+ ,c.TRAVELER_LAST_NAME_n
+ ,c.TRAVELER_GENDER_NAME_n
+ ,c.TRAVELER_IS_PRIMARY_n
+ ,c.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+ ,c.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+ ,c.TRAVELER_IS_SURNAME_LOWER_CASE_n
+ ,c.TRAVELER_IS_SURNAME_UPPER_CASE_n
+ ,row_number(c.FRAUD_TRANSACTION_ID) as row_num
+ FROM
+ (
+  SELECT
+   b.FRAUD_TRANSACTION_ID
+  ,b.TRAVELER_FULL_NAME_DERIVED_n
+  ,b.TRAVELER_GIVEN_NAME_n
+  ,b.TRAVELER_MIDDLE_NAME_n
+  ,b.TRAVELER_LAST_NAME_n
+  ,b.TRAVELER_GENDER_NAME_n
+  ,b.TRAVELER_IS_PRIMARY_n
+  ,b.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+  ,b.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+  ,b.TRAVELER_IS_SURNAME_LOWER_CASE_n
+  ,b.TRAVELER_IS_SURNAME_UPPER_CASE_n
+  FROM
+  (
+   SELECT
+    a.FRAUD_TRANSACTION_ID
+   ,a.TRAVELER_FULL_NAME_DERIVED_n
+   ,a.TRAVELER_GIVEN_NAME_n
+   ,a.TRAVELER_MIDDLE_NAME_n
+   ,a.TRAVELER_LAST_NAME_n
+   ,a.TRAVELER_GENDER_NAME_n
+   ,a.TRAVELER_IS_PRIMARY_n
+   ,a.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+   ,a.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+   ,a.TRAVELER_IS_SURNAME_LOWER_CASE_n
+   ,a.TRAVELER_IS_SURNAME_UPPER_CASE_n
+   FROM
+   (
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_FULL_NAME_DERIVED_1 AS TRAVELER_FULL_NAME_DERIVED_n
+     ,TRAVELER_GIVEN_NAME_1 AS TRAVELER_GIVEN_NAME_n
+     ,TRAVELER_MIDDLE_NAME_1 AS TRAVELER_MIDDLE_NAME_n
+     ,TRAVELER_LAST_NAME_1 AS TRAVELER_LAST_NAME_n
+     ,TRAVELER_GENDER_NAME_1 AS TRAVELER_GENDER_NAME_n
+     ,TRAVELER_IS_PRIMARY_1 AS TRAVELER_IS_PRIMARY_n
+     ,TRAVELER_IS_GIVEN_NAME_LOWER_CASE_1 AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+     ,TRAVELER_IS_GIVEN_NAME_UPPER_CASE_1 AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+     ,TRAVELER_IS_SURNAME_LOWER_CASE_1 AS TRAVELER_IS_SURNAME_LOWER_CASE_n
+     ,TRAVELER_IS_SURNAME_UPPER_CASE_1 AS TRAVELER_IS_SURNAME_UPPER_CASE_n
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_FULL_NAME_DERIVED_1 <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_FULL_NAME_DERIVED_2 AS TRAVELER_FULL_NAME_DERIVED_n
+     ,TRAVELER_GIVEN_NAME_2 AS TRAVELER_GIVEN_NAME_n
+     ,TRAVELER_MIDDLE_NAME_2 AS TRAVELER_MIDDLE_NAME_n
+     ,TRAVELER_LAST_NAME_2 AS TRAVELER_LAST_NAME_n
+     ,TRAVELER_GENDER_NAME_2 AS TRAVELER_GENDER_NAME_n
+     ,TRAVELER_IS_PRIMARY_2 AS TRAVELER_IS_PRIMARY_n
+     ,TRAVELER_IS_GIVEN_NAME_LOWER_CASE_2 AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+     ,TRAVELER_IS_GIVEN_NAME_UPPER_CASE_2 AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+     ,TRAVELER_IS_SURNAME_LOWER_CASE_2 AS TRAVELER_IS_SURNAME_LOWER_CASE_n
+     ,TRAVELER_IS_SURNAME_UPPER_CASE_2 AS TRAVELER_IS_SURNAME_UPPER_CASE_n
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_FULL_NAME_DERIVED_2 <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_FULL_NAME_DERIVED_3 AS TRAVELER_FULL_NAME_DERIVED_n
+     ,TRAVELER_GIVEN_NAME_3 AS TRAVELER_GIVEN_NAME_n
+     ,TRAVELER_MIDDLE_NAME_3 AS TRAVELER_MIDDLE_NAME_n
+     ,TRAVELER_LAST_NAME_3 AS TRAVELER_LAST_NAME_n
+     ,TRAVELER_GENDER_NAME_3 AS TRAVELER_GENDER_NAME_n
+     ,TRAVELER_IS_PRIMARY_3 AS TRAVELER_IS_PRIMARY_n
+     ,TRAVELER_IS_GIVEN_NAME_LOWER_CASE_3 AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+     ,TRAVELER_IS_GIVEN_NAME_UPPER_CASE_3 AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+     ,TRAVELER_IS_SURNAME_LOWER_CASE_3 AS TRAVELER_IS_SURNAME_LOWER_CASE_n
+     ,TRAVELER_IS_SURNAME_UPPER_CASE_3 AS TRAVELER_IS_SURNAME_UPPER_CASE_n
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_FULL_NAME_DERIVED_3 <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_FULL_NAME_DERIVED_4 AS TRAVELER_FULL_NAME_DERIVED_n
+     ,TRAVELER_GIVEN_NAME_4 AS TRAVELER_GIVEN_NAME_n
+     ,TRAVELER_MIDDLE_NAME_4 AS TRAVELER_MIDDLE_NAME_n
+     ,TRAVELER_LAST_NAME_4 AS TRAVELER_LAST_NAME_n
+     ,TRAVELER_GENDER_NAME_4 AS TRAVELER_GENDER_NAME_n
+     ,TRAVELER_IS_PRIMARY_4 AS TRAVELER_IS_PRIMARY_n
+     ,TRAVELER_IS_GIVEN_NAME_LOWER_CASE_4 AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+     ,TRAVELER_IS_GIVEN_NAME_UPPER_CASE_4 AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+     ,TRAVELER_IS_SURNAME_LOWER_CASE_4 AS TRAVELER_IS_SURNAME_LOWER_CASE_n
+     ,TRAVELER_IS_SURNAME_UPPER_CASE_4 AS TRAVELER_IS_SURNAME_UPPER_CASE_n
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_FULL_NAME_DERIVED_4 <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_FULL_NAME_DERIVED_5 AS TRAVELER_FULL_NAME_DERIVED_n
+     ,TRAVELER_GIVEN_NAME_5 AS TRAVELER_GIVEN_NAME_n
+     ,TRAVELER_MIDDLE_NAME_5 AS TRAVELER_MIDDLE_NAME_n
+     ,TRAVELER_LAST_NAME_5 AS TRAVELER_LAST_NAME_n
+     ,TRAVELER_GENDER_NAME_5 AS TRAVELER_GENDER_NAME_n
+     ,TRAVELER_IS_PRIMARY_5 AS TRAVELER_IS_PRIMARY_n
+     ,TRAVELER_IS_GIVEN_NAME_LOWER_CASE_5 AS TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+     ,TRAVELER_IS_GIVEN_NAME_UPPER_CASE_5 AS TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+     ,TRAVELER_IS_SURNAME_LOWER_CASE_5 AS TRAVELER_IS_SURNAME_LOWER_CASE_n
+     ,TRAVELER_IS_SURNAME_UPPER_CASE_5 AS TRAVELER_IS_SURNAME_UPPER_CASE_n
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_FULL_NAME_DERIVED_5 <> ''
+    ) a
+   GROUP BY
+    a.FRAUD_TRANSACTION_ID
+   ,a.TRAVELER_FULL_NAME_DERIVED_n
+   ,a.TRAVELER_GIVEN_NAME_n
+   ,a.TRAVELER_MIDDLE_NAME_n
+   ,a.TRAVELER_LAST_NAME_n
+   ,a.TRAVELER_GENDER_NAME_n
+   ,a.TRAVELER_IS_PRIMARY_n
+   ,a.TRAVELER_IS_GIVEN_NAME_LOWER_CASE_n
+   ,a.TRAVELER_IS_GIVEN_NAME_UPPER_CASE_n
+   ,a.TRAVELER_IS_SURNAME_LOWER_CASE_n
+   ,a.TRAVELER_IS_SURNAME_UPPER_CASE_n
+   ) b
+  DISTRIBUTE BY b.FRAUD_TRANSACTION_ID
+  SORT BY b.FRAUD_TRANSACTION_ID, b.TRAVELER_FULL_NAME_DERIVED_n desc
+ ) c
+) d
+GROUP BY
+d.FRAUD_TRANSACTION_ID
+;

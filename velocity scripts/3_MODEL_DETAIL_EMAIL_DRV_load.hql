@@ -1,0 +1,106 @@
+SET hive.stats.autogather=false;
+SET hive.exec.compress.output=true; 
+SET mapred.output.compression.codec=org.apache.hadoop.io.compress.SnappyCodec; 
+SET mapred.output.compression.type=BLOCK;
+SET hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat;
+
+USE gfora;
+
+DROP TABLE MODEL_DETAIL_EMAIL_DRV;
+
+CREATE TABLE MODEL_DETAIL_EMAIL_DRV
+ROW FORMAT DELIMITED
+STORED AS SEQUENCEFILE
+AS
+
+SELECT
+ d.FRAUD_TRANSACTION_ID
+,max(case 
+      when d.row_num = 1 then d.TRAVELER_n_EMAIL_ADDRESS 
+      else ''
+     end) AS TRAVELER_EMAIL_ADDRESS_1
+,max(case 
+      when d.row_num = 2 then d.TRAVELER_n_EMAIL_ADDRESS 
+      else ''
+     end) AS TRAVELER_EMAIL_ADDRESS_2
+,max(case 
+      when d.row_num = 3 then d.TRAVELER_n_EMAIL_ADDRESS 
+      else ''
+     end) AS TRAVELER_EMAIL_ADDRESS_3
+,max(case 
+      when d.row_num = 4 then d.TRAVELER_n_EMAIL_ADDRESS 
+      else ''
+     end) AS TRAVELER_EMAIL_ADDRESS_4
+,max(case 
+      when d.row_num = 5 then d.TRAVELER_n_EMAIL_ADDRESS 
+      else ''
+     end) AS TRAVELER_EMAIL_ADDRESS_5
+FROM
+(
+ SELECT
+  c.FRAUD_TRANSACTION_ID
+ ,c.TRAVELER_n_EMAIL_ADDRESS
+ ,row_number(c.FRAUD_TRANSACTION_ID) as row_num
+ FROM
+ (
+  SELECT
+   b.FRAUD_TRANSACTION_ID
+  ,b.TRAVELER_n_EMAIL_ADDRESS
+  FROM
+  (
+   SELECT
+     a.FRAUD_TRANSACTION_ID
+    ,a.TRAVELER_n_EMAIL_ADDRESS
+   FROM
+   (
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_1_EMAIL_ADDRESS as TRAVELER_n_EMAIL_ADDRESS
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_1_EMAIL_ADDRESS <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_2_EMAIL_ADDRESS as TRAVELER_n_EMAIL_ADDRESS
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_2_EMAIL_ADDRESS <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_3_EMAIL_ADDRESS as TRAVELER_n_EMAIL_ADDRESS
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_3_EMAIL_ADDRESS <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_4_EMAIL_ADDRESS as TRAVELER_n_EMAIL_ADDRESS
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_4_EMAIL_ADDRESS <> ''
+
+    UNION ALL
+    SELECT
+      FRAUD_TRANSACTION_ID
+     ,TRAVELER_5_EMAIL_ADDRESS as TRAVELER_n_EMAIL_ADDRESS
+    FROM
+    gfora.FRAUD_SCORING_XML_MODEL_DETAIL_DRV1
+    WHERE TRAVELER_5_EMAIL_ADDRESS <> ''
+    ) a
+   GROUP BY
+    a.FRAUD_TRANSACTION_ID
+   ,a.TRAVELER_n_EMAIL_ADDRESS
+   ) b
+  DISTRIBUTE BY b.FRAUD_TRANSACTION_ID
+  SORT BY b.FRAUD_TRANSACTION_ID, b.TRAVELER_n_EMAIL_ADDRESS desc
+ ) c
+) d
+GROUP BY
+d.FRAUD_TRANSACTION_ID
+;
+
